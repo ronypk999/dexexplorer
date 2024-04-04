@@ -1,4 +1,5 @@
 import Banner from "../components/Banner/Banner";
+import TokenInfo from "../components/tokenInfo/TokenInfo";
 import WorldCrypto from "../components/worldCrypto/WorldCrypto";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <Banner></Banner>
       <WorldCrypto></WorldCrypto>
+      <TokenInfo></TokenInfo>
     </>
   );
 };
