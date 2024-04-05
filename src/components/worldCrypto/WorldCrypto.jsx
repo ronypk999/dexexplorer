@@ -2,7 +2,7 @@ import WorldCryptoImage from "../../assets/worldCrypto.png";
 const WorldCrypto = () => {
   return (
     <>
-      <div className="md:mx-6 mx-3  rounded-box mt-12">
+      <div id="world" className="md:mx-6 mx-3  rounded-box mt-12">
         <div className="text-center font-bold mb-5">
           <h1 className="text-2xl md:text-5xl">Worlds First Crypto Explorer</h1>
           <h2 className="text-xl md:text-4xl">

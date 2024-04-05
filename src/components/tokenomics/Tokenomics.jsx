@@ -4,7 +4,7 @@ const Tokenomics = () => {
       <div className="hero py-12 bg-black">
         <div className="hero-overlay bg-opacity-0"></div>
         <div className="hero-content  mx-3 ">
-          <div className="max-w-lg md:h-[50vh] relative">
+          <div className="max-w-lg md:h-[500px] relative">
             <div className="absolute hidden md:block left-[-450px] top-[70px] z-0">
               <div className="relative">
                 <div className="border-4 border-dashed border-white rounded-full p-4">
