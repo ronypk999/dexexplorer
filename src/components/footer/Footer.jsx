@@ -23,7 +23,7 @@ const Footer = () => {
         {/* header  */}
         <h1 className="text-3xl md:text-5xl font-semibold text-white text-center leading-[65px] ">
           Don&apos;t Miss Out Our{" "}
-          <span className="text-primary">$DXE Token</span> <br /> Sale!
+          <span className="text-primary">$DXE Token</span> Sale!
         </h1>
         {/* description  */}
         <p className="max-w-[58%] mx-auto text-center">
@@ -101,7 +101,7 @@ const Footer = () => {
         </div>
       </div>
       <footer className="footer footer-center p-10 bg-transparent text-white rounded">
-        <nav className="grid grid-flow-col gap-4">
+        <nav className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <a className="link link-hover flex items-center gap-1">
             <FaGithub></FaGithub> <span>Github</span>
           </a>

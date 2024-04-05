@@ -3,7 +3,7 @@ const TokenCard2 = ({ tokenInfo }) => {
   const { name, description, icon } = tokenInfo;
   return (
     <>
-      <div className="card border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
+      <div className="card border-2 pt-6 md:pt-0 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
         <figure>
           <div>{icon}</div>
         </figure>
