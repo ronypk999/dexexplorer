@@ -1,9 +1,15 @@
 import TokenCard from "./tokenCard/TokenCard";
-import { FaSearchengin, FaConnectdevelop, FaRobot } from "react-icons/fa";
+import {
+  FaSearchengin,
+  FaConnectdevelop,
+  FaRobot,
+  FaCode,
+} from "react-icons/fa";
 import TokenCard2 from "./tokenCard/TokenCard2";
 import { IoAnalyticsSharp } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
 import { TbMessage2Bolt } from "react-icons/tb";
+import { GrGrow } from "react-icons/gr";
 
 const TokenInfo = () => {
   const tokenArray = [
@@ -70,7 +76,7 @@ const TokenInfo = () => {
 
   return (
     <>
-      <div className="md:mx-6 mx-3  bg-black text-white rounded-box">
+      <div className=" bg-black text-white">
         <div className="w-full md:h-12 bg-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -109,18 +115,58 @@ const TokenInfo = () => {
             ></path>
           </svg>
         </div>
-        <div className="text-center pt-12 font-bold mb-5">
-          <h1 className="text-2xl md:text-5xl">Token Info</h1>
-        </div>
-        <div className="flex pt-12 px-3 md:px-6 flex-col md:flex-row gap-6">
-          {tokenArray.map((tokenInfo, index) => {
-            return <TokenCard key={index} tokenInfo={tokenInfo}></TokenCard>;
-          })}
-        </div>
-        <div className="grid pt-12 grid-cols-1 md:grid-cols-2 gap-12 px-3 md:px-6 ">
-          {infoArray.map((tokenInfo, index) => {
-            return <TokenCard2 key={index} tokenInfo={tokenInfo}></TokenCard2>;
-          })}
+        <div className="md:px-6 px-3 ">
+          <div className="text-center pt-12 font-bold mb-5">
+            <h1 className="text-2xl md:text-5xl">Token Info</h1>
+          </div>
+          <div className="flex pt-12 px-3 md:px-6 flex-col md:flex-row gap-6">
+            {tokenArray.map((tokenInfo, index) => {
+              return <TokenCard key={index} tokenInfo={tokenInfo}></TokenCard>;
+            })}
+          </div>
+          <div className="grid pt-12 grid-cols-1 md:grid-cols-2 gap-12 px-3 md:px-6 ">
+            {infoArray.map((tokenInfo, index) => {
+              return (
+                <TokenCard2 key={index} tokenInfo={tokenInfo}></TokenCard2>
+              );
+            })}
+          </div>
+          <div className="py-12 px-3 md:px-6 space-y-12">
+            <div className="card border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
+              <figure>
+                <div>
+                  <GrGrow className="text-8xl"></GrGrow>
+                </div>
+              </figure>
+
+              <div className="card-body flex-1">
+                <h2 className="card-title">Launchpad</h2>
+                <p>
+                  DexExplore&apos;s launchpad feature adds a new dimension to
+                  its ecosystem. Launchpads provide a platform for new projects
+                  to raise funds and gain exposure, creating a synergy that can
+                  positively impact $DXE as a token and enhance the overall
+                  value proposition of DexExplore.
+                </p>
+              </div>
+            </div>
+            <div className="card border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
+              <figure>
+                <div>
+                  <FaCode className="text-8xl"></FaCode>
+                </div>
+              </figure>
+
+              <div className="card-body flex-1">
+                <h2 className="card-title">Developer Tools</h2>
+                <p>
+                  Utilize our API to develop custom tools and applications,
+                  enhancing your overall experience. Create personalized
+                  solutions tailored to your specific needs.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
