@@ -132,7 +132,7 @@ const TokenInfo = () => {
             })}
           </div>
           <div className="py-12 px-3 md:px-6 space-y-12">
-            <div className="card border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
+            <div className="card pt-6 lg:pt-0 border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
               <figure>
                 <div>
                   <GrGrow className="text-8xl"></GrGrow>
@@ -150,7 +150,7 @@ const TokenInfo = () => {
                 </p>
               </div>
             </div>
-            <div className="card border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
+            <div className="card pt-6 lg:pt-0 border-2 px-3 md:px-6 lg:items-center lg:card-side bg-black  shadow-xl">
               <figure>
                 <div>
                   <FaCode className="text-8xl"></FaCode>
