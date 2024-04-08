@@ -1,4 +1,5 @@
 import bannerIamge from "../../assets/banner.gif";
+import { Web3ModalProvider } from "../../web3/WalletSetup";
 const Banner = () => {
   return (
     <>
@@ -49,7 +50,9 @@ const Banner = () => {
               <span>To Buy Dex Explore Token (DXE) Send SOL Coin!</span>
               <span>For 1 SOL 60,000 DXE – Buy Min 0.5 SOL</span>
             </p>
-            <button className="btn btn-primary">Connect Wallet</button>
+            <div className="mx-auto w-fit">
+              <Web3ModalProvider></Web3ModalProvider>
+            </div>
           </div>
         </div>
       </div>
