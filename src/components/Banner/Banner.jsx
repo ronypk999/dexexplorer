@@ -1,6 +1,77 @@
+import Countdown from "react-countdown";
 import bannerIamge from "../../assets/banner.gif";
 import { Web3ModalProvider } from "../../web3/WalletSetup";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const Banner = () => {
+  const [info, setInfo] = useState(null);
+  useEffect(() => {
+    axios
+      .post(
+        "https://anoxpay.com",
+        JSON.stringify({
+          info: 1,
+        })
+      )
+      .then((data) => setInfo(data.data))
+      .catch();
+  }, []);
+  const renderer = ({ days, hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return (
+        <>
+          <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
+            <div className="flex flex-col">
+              <span className="text-pink-500">00</span> <span>Days</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">00</span> <span>Hours</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">00</span> <span>Minutes</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">00</span> <span>Seconds</span>
+            </div>
+          </h1>
+        </>
+      );
+    } else {
+      // Render a countdown
+      return (
+        <>
+          <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
+            <div className="flex flex-col">
+              <span className="text-pink-500">
+                {String(days).padStart(2, "0")}
+              </span>{" "}
+              <span>Days</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">
+                {String(hours).padStart(2, "0")}
+              </span>
+              <span>Hours</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">
+                {String(minutes).padStart(2, "0")}
+              </span>
+              <span>Minutes</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-pink-500">
+                {String(seconds).padStart(2, "0")}
+              </span>
+              <span>Seconds</span>
+            </div>
+          </h1>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       <div
@@ -12,20 +83,11 @@ const Banner = () => {
         <div className="hero-overlay bg-opacity-0"></div>
         <div className="hero-content  mx-3 border-2 border-white rounded-box bg-black text-center text-neutral-content">
           <div className="max-w-lg">
-            <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
-              <div className="flex flex-col">
-                <span className="text-pink-500">02</span> <span>Days</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-pink-500">02</span> <span>Hours</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-pink-500">02</span> <span>Minutes</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-pink-500">02</span> <span>Seconds</span>
-              </div>
-            </h1>
+            <Countdown
+              date={info ? info.presaleEndTime : Date.now + 1000}
+              renderer={renderer}
+            />
+            ,
             <div className="w-fit text-left mx-auto mb-5">
               <h1 className="mb-5 md:text-4xl font-bold text-2xl">
                 Presale is live
