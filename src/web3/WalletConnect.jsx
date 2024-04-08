@@ -1,17 +1,26 @@
 import { useAccount, useSendTransaction } from "wagmi";
 import bnb from "../assets/bnb.png";
+import dexicon from "../assets/dexicon.png";
 import { useBalance } from "wagmi";
 import { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { parseEther } from "viem";
+import axios from "axios";
+import Success from "../components/modal/Success";
 
 export const WalletConnect = () => {
   const [dxe, setDxe] = useState(0);
-
+  const [buyBtnTxt, setBuyBtnTxt] = useState("Buy With BNB");
   const bnbRef = useRef(0);
+  const [amounInBNB, setAmounInBNB] = useState(0);
   const { isConnected, address } = useAccount();
-  const { sendTransaction, data: SendTransactionData } = useSendTransaction();
+  const [openModal, setOpenModal] = useState(false);
+  const {
+    sendTransaction,
+    data: SendTransactionData,
+    error: SendTransactionErrorType,
+  } = useSendTransaction();
   const balance = useBalance({
     address: address,
   });
@@ -22,7 +31,7 @@ export const WalletConnect = () => {
   };
 
   const buyWithBnb = () => {
-    const amount = parseFloat(bnbRef.current.value);
+    const amount = parseFloat(bnbRef?.current?.value);
 
     if (isNaN(amount)) {
       toast.error("Only Number is allowed", {
@@ -58,28 +67,61 @@ export const WalletConnect = () => {
       });
       return;
     }
-
+    setAmounInBNB(bnbRef?.current?.value);
+    setBuyBtnTxt("Processing");
     sendTransaction({
-      to: "0x77713194580a33816Ba7CDCFa5e9a59FF343535d",
+      to: "0xDD0F51CD9290519A8846e5a13F631192b3522E2a",
       value: parseEther(amount.toString()),
     });
   };
 
   useEffect(() => {
+    if (SendTransactionErrorType) {
+      setBuyBtnTxt("Buy With BNB");
+      toast.error("Transaction failed", {
+        theme: "dark",
+      });
+    }
+  }, [SendTransactionErrorType]);
+
+  useEffect(() => {
     if (SendTransactionData) {
-      const apiObj = {
-        amountInBNB: bnbRef.current.value,
-        hash: SendTransactionData,
+      setBuyBtnTxt("successfull");
+      setOpenModal(true);
+      const apiObj = JSON.stringify({
+        amountInBNB: amounInBNB,
+        amountInDXE: dxe,
         address: address,
-      };
+        hash: SendTransactionData,
+      });
 
       //send data to database
+      axios
+        .post("https://anoxpay.com", apiObj)
+        .then(() => {
+          setBuyBtnTxt("Buy More With BNB");
+        })
+        .catch(() => {
+          setBuyBtnTxt("Buy With BNB");
+        });
     }
-  }, [SendTransactionData, address]);
+  }, [SendTransactionData]);
 
   return (
     <>
       <ToastContainer></ToastContainer>
+      <Success
+        purchase={{
+          amountInBNB: amounInBNB,
+          amountInDXE: dxe,
+          address: address,
+          hash: SendTransactionData,
+          dxeicon: dexicon,
+          bnbicon: bnb,
+        }}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+      ></Success>
       <div>
         {isConnected && (
           <>
@@ -105,14 +147,14 @@ export const WalletConnect = () => {
                     readOnly={true}
                     value={dxe}
                   />
-                  <img src={bnb} className="w-6 h-6" />
+                  <img src={dexicon} className="w-7 h-7" />
                 </div>
               </div>
             </div>
 
             <div className="pt-6">
               <button onClick={buyWithBnb} className="btn btn-primary">
-                Buy with BNB <img src={bnb} className="w-6 h-6" />
+                {buyBtnTxt} <img src={bnb} className="w-6 h-6" />
               </button>
             </div>
           </>
