@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import footer from "../../assets/footer.jpeg";
 import { FaGithub, FaTelegram, FaInfoCircle, FaBolt } from "react-icons/fa";
 import { FaMessage, FaSquareXTwitter } from "react-icons/fa6";
+import { InfoContext } from "../../provider/ContextProvider";
 const Footer = () => {
+  const info = useContext(InfoContext);
+  const { totalHolders } = info;
   return (
     <div
       className="flex flex-col items-center justify-center border border-black w-full"
@@ -67,7 +71,7 @@ const Footer = () => {
           </div>
 
           <div className="relative -left-5">
-            <p className="text-lg text-white">420+</p>
+            <p className="text-lg text-white">{totalHolders}+</p>
             <p className="text-sm text-gray-400">people already participated</p>
           </div>
         </div>

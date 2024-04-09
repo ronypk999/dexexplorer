@@ -4,7 +4,7 @@ import { WagmiProvider } from "wagmi";
 import { bscTestnet } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WalletConnect } from "./WalletConnect";
-
+import PropTypes from "prop-types";
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
@@ -35,12 +35,16 @@ createWeb3Modal({
   enableOnramp: true, // Optional - false as default
 });
 
-export function Web3ModalProvider() {
+export function Web3ModalProvider({ SetMyToken }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <WalletConnect></WalletConnect>
+        <WalletConnect SetMyToken={SetMyToken}></WalletConnect>
       </QueryClientProvider>
     </WagmiProvider>
   );
 }
+
+Web3ModalProvider.propTypes = {
+  SetMyToken: PropTypes.func.isRequired,
+};

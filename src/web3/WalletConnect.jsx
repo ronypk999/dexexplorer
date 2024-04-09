@@ -2,12 +2,14 @@ import { useAccount, useSendTransaction } from "wagmi";
 import bnb from "../assets/bnb.png";
 import dexicon from "../assets/dexicon.png";
 import { useBalance } from "wagmi";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { parseEther } from "viem";
 import axios from "axios";
 import Success from "../components/modal/Success";
+import PropTypes from "prop-types";
+import { InfoContext } from "../provider/ContextProvider";
 
 export const WalletConnect = () => {
   const [dxe, setDxe] = useState(0);
@@ -16,6 +18,8 @@ export const WalletConnect = () => {
   const [amounInBNB, setAmounInBNB] = useState(0);
   const { isConnected, address } = useAccount();
   const [openModal, setOpenModal] = useState(false);
+  const info = useContext(InfoContext);
+  const { updateData } = info;
   const {
     sendTransaction,
     data: SendTransactionData,
@@ -100,12 +104,17 @@ export const WalletConnect = () => {
         .post("https://anoxpay.com", apiObj)
         .then(() => {
           setBuyBtnTxt("Buy More With BNB");
+          updateData();
         })
         .catch(() => {
           setBuyBtnTxt("Buy With BNB");
         });
     }
   }, [SendTransactionData]);
+
+  useEffect(() => {
+    updateData();
+  }, [isConnected]);
 
   return (
     <>
@@ -165,4 +174,7 @@ export const WalletConnect = () => {
       </div>
     </>
   );
+};
+WalletConnect.propTypes = {
+  SetMyToken: PropTypes.func.isRequired,
 };

@@ -1,21 +1,13 @@
 import Countdown from "react-countdown";
 import bannerIamge from "../../assets/banner.gif";
 import { Web3ModalProvider } from "../../web3/WalletSetup";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
+import { useContext } from "react";
+import { InfoContext } from "../../provider/ContextProvider";
 const Banner = () => {
-  const [info, setInfo] = useState(null);
-  useEffect(() => {
-    axios
-      .post(
-        "https://anoxpay.com",
-        JSON.stringify({
-          info: 1,
-        })
-      )
-      .then((data) => setInfo(data.data))
-      .catch();
-  }, []);
+  const info = useContext(InfoContext);
+  const { collectedDXE, presaleEndTime, myPurchase } = info;
+
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a completed state
@@ -83,11 +75,7 @@ const Banner = () => {
         <div className="hero-overlay bg-opacity-0"></div>
         <div className="hero-content  mx-3 border-2 border-white rounded-box bg-black text-center text-neutral-content">
           <div className="max-w-lg">
-            <Countdown
-              date={info ? info.presaleEndTime : Date.now + 1000}
-              renderer={renderer}
-            />
-            ,
+            <Countdown date={presaleEndTime || Date.now} renderer={renderer} />
             <div className="w-fit text-left mx-auto mb-5">
               <h1 className="mb-5 md:text-4xl font-bold text-2xl">
                 Presale is live
@@ -108,8 +96,19 @@ const Banner = () => {
                 </div>
               </div>
             </div>
+            <div className="md:px-12">
+              <div>{collectedDXE} / 600000000 $DXE</div>
+              <progress
+                className="progress bg-neutral-500 progress-primary"
+                value={(collectedDXE / 600000000) * 100}
+                max="100"
+              ></progress>
+            </div>
             <p className="mb-5 flex flex-col gap-3">
-              <span>To Buy Dex Explore Token (DXE) Send SOL Coin!</span>
+              <span>YOUR PURCHASED $DXE = {myPurchase || 0}</span>
+            </p>
+            <p className="mb-5 flex flex-col gap-3">
+              <span>To Buy Dex Explore Token (Coin) Send SOL Coin!</span>
               <span>For 1 SOL 60,000 DXE – Buy Min 0.5 SOL</span>
             </p>
             <div className="mx-auto w-fit">
