@@ -67,6 +67,7 @@ const Banner = () => {
   return (
     <>
       <div
+        id="buy"
         className="hero py-12"
         style={{
           backgroundImage: `url(${bannerIamge})`,

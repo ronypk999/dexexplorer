@@ -1,14 +1,15 @@
 import logo from "../../assets/logo.png";
 import audit from "../../assets/audit.svg";
+import { Link, NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
       <div className="bg-black text-white">
         <div className="flex flex-col gap-3 sm:flex-row items-center justify-around">
           <div className="">
-            <a className="btn btn-ghost mx-0 px-0">
+            <Link to="/" className="btn btn-ghost mx-0 px-0">
               <img src={logo} className="w-48" alt="Dex Explorer" />
-            </a>
+            </Link>
           </div>
           <div className="">
             <img
@@ -18,7 +19,12 @@ const Header = () => {
             />
           </div>
           <div className="">
-            <a className="btn btn-primary rounded-none">Claim DXE Coins</a>
+            <NavLink
+              to="/claim"
+              className="btn hover:bg-blue-900 btn-primary rounded-none"
+            >
+              Claim DXE Coins
+            </NavLink>
           </div>
         </div>
 

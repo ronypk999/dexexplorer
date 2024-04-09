@@ -3,6 +3,9 @@ import Layout from "../layout/Layout";
 import Home from "../pages/Home";
 import axios from "axios";
 import ContextProvider from "../provider/ContextProvider";
+import Claim from "../pages/Claim";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +29,18 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/claim",
+        element: <Claim />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

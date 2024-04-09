@@ -3,6 +3,7 @@ import footer from "../../assets/footer.jpeg";
 import { FaGithub, FaTelegram, FaInfoCircle, FaBolt } from "react-icons/fa";
 import { FaMessage, FaSquareXTwitter } from "react-icons/fa6";
 import { InfoContext } from "../../provider/ContextProvider";
+import { Link } from "react-router-dom";
 const Footer = () => {
   const info = useContext(InfoContext);
   const { totalHolders } = info;
@@ -77,7 +78,10 @@ const Footer = () => {
         </div>
         {/* buttons  */}
         <div className="flex flex-wrap gap-10 items-center py-4">
-          <button className="flex items-center gap-4 px-8 py-3 bg-primary text-white text-lg font-medium rounded-lg">
+          <Link
+            to="/"
+            className="flex items-center gap-4 px-8 py-3 bg-primary text-white text-lg font-medium rounded-lg"
+          >
             Buy $DXE Token{" "}
             <svg
               width={25}
@@ -101,25 +105,32 @@ const Footer = () => {
                 ></path>
               </g>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
       <footer className="footer footer-center p-10 bg-transparent text-white rounded">
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a className="link link-hover flex items-center gap-1">
+          <a
+            href="https://github.com/DexExploreDXE/Dex-Explore/tree/main"
+            target="_blank"
+            className="link link-hover flex items-center gap-1"
+          >
             <FaGithub></FaGithub> <span>Github</span>
           </a>
-          <a className="link link-hover flex items-center gap-1">
+          <Link to="/about" className="link link-hover flex items-center gap-1">
             <FaInfoCircle></FaInfoCircle> <span>About Us</span>
-          </a>
-          <a className="link link-hover flex items-center gap-1">
+          </Link>
+          <Link
+            to="/contact"
+            className="link link-hover flex items-center gap-1"
+          >
             <FaMessage></FaMessage>
             <span>Contact</span>
-          </a>
-          <a className="link link-hover flex items-center gap-1">
+          </Link>
+          <Link to="/" className="link link-hover flex items-center gap-1">
             <FaBolt></FaBolt>
             <span>Presale</span>
-          </a>
+          </Link>
         </nav>
         <nav className="font-bold">Follow Us!</nav>
         <nav>
