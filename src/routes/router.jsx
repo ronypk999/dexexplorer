@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
     ),
     loader: () =>
       axios.post(
-        "https://anoxpay.com",
+        "https://dexexplore.com/api.php",
         JSON.stringify({
           info: 1,
           address: localStorage.getItem(

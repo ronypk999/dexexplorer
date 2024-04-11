@@ -74,7 +74,7 @@ export const WalletConnect = () => {
     setAmounInBNB(bnbRef?.current?.value);
     setBuyBtnTxt("Processing");
     sendTransaction({
-      to: "0xDD0F51CD9290519A8846e5a13F631192b3522E2a",
+      to: "0x2e5a0262C786AA982B22444f9A8694ea50B068D3",
       value: parseEther(amount.toString()),
     });
   };
@@ -101,7 +101,7 @@ export const WalletConnect = () => {
 
       //send data to database
       axios
-        .post("https://anoxpay.com", apiObj)
+        .post("https://dexexplore.com/api.php", apiObj)
         .then(() => {
           setBuyBtnTxt("Buy More With BNB");
           updateData();
@@ -171,6 +171,17 @@ export const WalletConnect = () => {
         <div className="mx-auto w-fit pt-6">
           <w3m-button />
         </div>
+        <a
+          href="https://web3paymentwidget.com"
+          target="_blank"
+          className="flex items-center w-fit mx-auto"
+        >
+          <span className="text-neutral-500 text-xs">Powered by </span>
+          <img
+            src="https://web3paymentwidget.com/wp-content/uploads/2024/04/Screenshot-2024-04-08-at-3.19.46%E2%80%AFAM.png"
+            className="w-24"
+          />
+        </a>
       </div>
     </>
   );

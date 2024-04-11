@@ -109,8 +109,8 @@ const Banner = () => {
               <span>YOUR PURCHASED $DXE = {myPurchase || 0}</span>
             </p>
             <p className="mb-5 flex flex-col gap-3">
-              <span>To Buy Dex Explore Token (Coin) Send SOL Coin!</span>
-              <span>For 1 SOL 60,000 DXE – Buy Min 0.5 SOL</span>
+              <span>To Buy Dex Explore Token (Coin) Send BNB Coin!</span>
+              <span>For 1 BNB 60,000 DXE</span>
             </p>
             <div className="mx-auto w-fit">
               <Web3ModalProvider></Web3ModalProvider>

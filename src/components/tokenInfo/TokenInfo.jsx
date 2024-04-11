@@ -21,14 +21,14 @@ const TokenInfo = () => {
     },
     {
       name: "Presale",
-      description: "1 SOL 60,000 DXE Coins",
-      btnTxt: "Buy with SOL",
+      description: "1 BNB 60,000 DXE Coins",
+      btnTxt: "Buy with BNB",
       btnTarget: "#",
     },
     {
       name: "Blockchain",
       description: "Build On Multichain",
-      btnTxt: "SOL, ETH, BSC & More",
+      btnTxt: "BSC, ETH & More",
       btnTarget: "#",
     },
   ];

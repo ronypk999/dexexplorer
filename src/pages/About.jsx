@@ -1,4 +1,6 @@
 import AboutMore from "../components/about/AboutMore";
+import { FaTelegram } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 const About = () => {
   return (
@@ -19,10 +21,22 @@ const About = () => {
                 of digital assets with confidence and ease.
               </p>
             </div>
-            <div className="space-x-4">
-              <button className=" btn btn-primary" href="#">
-                Join our community
-              </button>
+            <div className="flex gap-3 flex-col sm:flex-row pt-12">
+              <a
+                href="https://t.me/dexexplore"
+                target="_blank"
+                className="btn btn-primary"
+              >
+                <FaTelegram className="text-xl"></FaTelegram> Follow on Telegram
+              </a>
+              <a
+                href="https://twitter.com/Dexexplore"
+                target="_blank"
+                className="btn btn-primary"
+              >
+                <FaSquareXTwitter className="text-xl"></FaSquareXTwitter> Follow
+                on Twitter X
+              </a>
             </div>
           </div>
         </div>
