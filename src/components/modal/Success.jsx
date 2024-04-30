@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 
 const Success = ({ openModal, setOpenModal, purchase }) => {
-  const { amountInDXE, amountInBNB, hash, address, dxeicon, bnbicon } =
-    purchase;
+  const { amountInDXE, amountInBNB, hash, address, dxeicon, coin } = purchase;
   return (
     <div>
       <div
@@ -40,7 +39,7 @@ const Success = ({ openModal, setOpenModal, purchase }) => {
           <div className="flex justify-center gap-3 opacity-80 pt-3">
             <div className="flex">
               <p className="">You paid: {amountInBNB}</p>
-              <img src={bnbicon} className="w-5 h-5" />
+              <img src={coin.icon} className="w-5 h-5" />
             </div>
             <div className="flex">
               <p className="">You receive: {amountInDXE}</p>
@@ -58,7 +57,7 @@ const Success = ({ openModal, setOpenModal, purchase }) => {
             <div>
               <a
                 className="btn btn-primary"
-                href={`https://bscscan.com/tx/${hash}`}
+                href={`${coin.scanUrl}${hash}`}
                 target="_blank"
               >
                 Open Transaction in Explorer

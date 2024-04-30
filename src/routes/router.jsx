@@ -20,14 +20,16 @@ export const router = createBrowserRouter([
         "https://dexexplore.com/api.php",
         JSON.stringify({
           info: 1,
-          address: localStorage.getItem(
-            "-walletlink:https://www.walletlink.org:Addresses"
-          ),
+          address: localStorage.getItem("address"),
         })
       ),
     children: [
       {
         path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/buy",
         element: <Home />,
       },
       {

@@ -40,8 +40,7 @@ const Roadmap = () => {
             <div className="timeline-end mb-10">
               <time className="font-mono italic">Live</time>
               <div className="text-lg font-black">$DXE Presale</div>
-              Our presale goal is to raise 5000 SOL in Soft cap and 10,000 SOL
-              in Hard Cap
+              Our presale goal is to raise $6m in Soft cap and $10m in Hard Cap
             </div>
             <hr />
           </li>

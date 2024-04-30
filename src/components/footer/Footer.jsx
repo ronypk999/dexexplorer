@@ -3,10 +3,46 @@ import footer from "../../assets/footer.jpeg";
 import { FaGithub, FaTelegram, FaInfoCircle, FaBolt } from "react-icons/fa";
 import { FaMessage, FaSquareXTwitter } from "react-icons/fa6";
 import { InfoContext } from "../../provider/ContextProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+const alphabet = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 const Footer = () => {
   const info = useContext(InfoContext);
   const { totalHolders } = info;
+
+  const location = useLocation();
+
+  const getRandomAvatar = () => {
+    const rand = Math.floor(Math.random() * alphabet.length);
+    return `https://api.dicebear.com/8.x/identicon/svg?seed=${alphabet[rand]}`;
+  };
+
   return (
     <div
       className="flex flex-col items-center justify-center border border-black w-full"
@@ -45,28 +81,28 @@ const Footer = () => {
           <div className="w-14 h-14 bg-transparent  rounded-full border-[3px] border-[#191919]">
             <img
               className="w-full h-full rounded-full"
-              src="https://source.unsplash.com/64x64/?people"
+              src={getRandomAvatar()}
               alt="avatar navigate ui"
             />
           </div>
           <div className="w-14 h-14 bg-[#191919]  rounded-full border-[3px] border-[#191919] relative -left-5">
             <img
               className="w-full h-full rounded-full"
-              src="https://source.unsplash.com/64x64/?kid"
+              src={getRandomAvatar()}
               alt="avatar navigate ui"
             />
           </div>
           <div className="w-14 h-14 bg-[#191919]  rounded-full border-[3px] border-[#191919]  relative -left-10">
             <img
               className="w-full h-full rounded-full"
-              src="https://source.unsplash.com/64x64/?male"
+              src={getRandomAvatar()}
               alt="avatar navigate ui"
             />
           </div>
           <div className="w-14 h-14 bg-[#191919]  rounded-full border-[3px] border-[#191919]  relative -left-[60px]">
             <img
               className="w-full h-full rounded-full"
-              src="https://source.unsplash.com/64x64/?female"
+              src={getRandomAvatar()}
               alt="avatar navigate ui"
             />
           </div>
@@ -79,7 +115,7 @@ const Footer = () => {
         {/* buttons  */}
         <div className="flex flex-wrap gap-10 items-center py-4">
           <Link
-            to="/"
+            to={location.pathname === "/buy" ? "/" : "/buy"}
             className="flex items-center gap-4 px-8 py-3 bg-primary text-white text-lg font-medium rounded-lg"
           >
             Buy $DXE Token{" "}

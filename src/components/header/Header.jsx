@@ -1,7 +1,9 @@
 import logo from "../../assets/logo.png";
 import audit from "../../assets/audit.svg";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 const Header = () => {
+  const location = useLocation();
+
   return (
     <>
       <div className="bg-black text-white">
@@ -19,12 +21,22 @@ const Header = () => {
             />
           </div>
           <div className="">
-            <NavLink
-              to="/claim"
-              className="btn hover:bg-blue-900 btn-primary rounded-none"
-            >
-              Claim DXE Coins
-            </NavLink>
+            {location.pathname === "/claim" && (
+              <NavLink
+                to="/"
+                className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
+              >
+                Buy $DXE Coins
+              </NavLink>
+            )}
+            {location.pathname !== "/claim" && (
+              <NavLink
+                to="/claim"
+                className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
+              >
+                Claim $DXE Coins
+              </NavLink>
+            )}
           </div>
         </div>
 

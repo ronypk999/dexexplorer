@@ -1,7 +1,7 @@
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { WagmiProvider } from "wagmi";
-import { bsc } from "wagmi/chains";
+import { bsc, mainnet } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WalletConnect } from "./WalletConnect";
 import PropTypes from "prop-types";
@@ -19,7 +19,7 @@ const metadata = {
   icons: ["https://dexexplore.com/dexicon.png"],
 };
 
-const chains = [bsc];
+const chains = [bsc, mainnet];
 const config = defaultWagmiConfig({
   chains,
   projectId,
@@ -35,16 +35,12 @@ createWeb3Modal({
   enableOnramp: true, // Optional - false as default
 });
 
-export function Web3ModalProvider({ SetMyToken }) {
+export function Web3ModalProvider() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <WalletConnect SetMyToken={SetMyToken}></WalletConnect>
+        <WalletConnect></WalletConnect>
       </QueryClientProvider>
     </WagmiProvider>
   );
 }
-
-Web3ModalProvider.propTypes = {
-  SetMyToken: PropTypes.func.isRequired,
-};

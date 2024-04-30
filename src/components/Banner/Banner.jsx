@@ -1,12 +1,15 @@
 import Countdown from "react-countdown";
 import bannerIamge from "../../assets/banner.gif";
-import { Web3ModalProvider } from "../../web3/WalletSetup";
+import { Web3ModalProvider } from "../../web3/evm/WalletSetup";
 
 import { useContext } from "react";
 import { InfoContext } from "../../provider/ContextProvider";
+import { Wallet } from "../../web3/solana/Wallet";
+import MainConnect from "../../web3/MainConnect";
+import liveGif from "../../assets/live.gif";
 const Banner = () => {
   const info = useContext(InfoContext);
-  const { collectedDXE, presaleEndTime, myPurchase } = info;
+  const { collectedDXE, presaleEndTime, myPurchase, usdPrice } = info;
 
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -76,20 +79,18 @@ const Banner = () => {
         <div className="hero-overlay bg-opacity-0"></div>
         <div className="hero-content  mx-3 border-2 border-white rounded-box bg-black text-center text-neutral-content">
           <div className="max-w-lg">
-            <Countdown date={presaleEndTime || Date.now} renderer={renderer} />
+            {/* <Countdown date={presaleEndTime || Date.now} renderer={renderer} /> */}
             <div className="w-fit text-left mx-auto mb-5">
-              <h1 className="mb-5 md:text-4xl font-bold text-2xl">
+              <h1 className="mb-5 md:text-3xl font-bold text-2xl flex items-center">
                 Presale is live
+                <img src={liveGif} className="w-12" />
               </h1>
               <div className="">
-                <h4>Presale is ongoing</h4>
-                <div className="flex flex-row gap-1">
-                  <div className="rounded-full h-5 w-5 bg-pink-500"></div>
-                  <div className="rounded-full h-5 w-5 bg-gradient-to-r from-pink-500 to-white"></div>
-                  <div className="rounded-full h-5 w-5 bg-white"></div>
-                  <div className="rounded-full h-5 w-5 bg-white"></div>
-                  <div className="rounded-full h-5 w-5 bg-white"></div>
-                  <div className="rounded-full h-5 w-5 bg-white"></div>
+                <h4 className="text-center pb-1">
+                  Stage 1 Price ${usdPrice} = 1 $DXE
+                </h4>
+                <div className="flex flex-row gap-1 justify-center">
+                  <div className="rounded-full h-5 w-5 bg-gradient-to-r from-violet-700 to-white"></div>
                   <div className="rounded-full h-5 w-5 bg-white"></div>
                   <div className="rounded-full h-5 w-5 bg-white"></div>
                   <div className="rounded-full h-5 w-5 bg-white"></div>
@@ -98,22 +99,27 @@ const Banner = () => {
               </div>
             </div>
             <div className="md:px-12">
-              <div>{collectedDXE} / 600000000 $DXE</div>
+              <div>
+                {collectedDXE.toFixed(2)} / {600000000 / 5} $DXE
+              </div>
               <progress
-                className="progress bg-neutral-500 progress-primary"
-                value={(collectedDXE / 600000000) * 100}
+                className="progress bg-neutral-500 progress-success"
+                value={(collectedDXE / (600000000 / 5)) * 100}
                 max="100"
               ></progress>
             </div>
             <p className="mb-5 flex flex-col gap-3">
-              <span>YOUR PURCHASED $DXE = {myPurchase || 0}</span>
+              <span>
+                YOUR PURCHASED $DXE = {myPurchase || 0} / $
+                {(myPurchase * usdPrice).toFixed(2)}
+              </span>
             </p>
             <p className="mb-5 flex flex-col gap-3">
-              <span>To Buy Dex Explore Token (Coin) Send BNB Coin!</span>
-              <span>For 1 BNB 60,000 DXE</span>
+              <span>Buy before price increases in stage 2</span>
             </p>
             <div className="mx-auto w-fit">
-              <Web3ModalProvider></Web3ModalProvider>
+              {/* <Web3ModalProvider></Web3ModalProvider> */}
+              <MainConnect></MainConnect>
             </div>
           </div>
         </div>

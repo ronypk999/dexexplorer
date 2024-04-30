@@ -10,8 +10,11 @@ import { IoAnalyticsSharp } from "react-icons/io5";
 import { GiWallet } from "react-icons/gi";
 import { TbMessage2Bolt } from "react-icons/tb";
 import { GrGrow } from "react-icons/gr";
+import { useContext } from "react";
+import { InfoContext } from "../../provider/ContextProvider";
 
 const TokenInfo = () => {
+  const { usdPrice } = useContext(InfoContext);
   const tokenArray = [
     {
       name: "Token Name",
@@ -21,14 +24,14 @@ const TokenInfo = () => {
     },
     {
       name: "Presale",
-      description: "1 BNB 60,000 DXE Coins",
-      btnTxt: "Buy with BNB",
+      description: `1 $DXE coin $${usdPrice}`,
+      btnTxt: "Buy with SOL/ETH/BNB",
       btnTarget: "#",
     },
     {
       name: "Blockchain",
       description: "Build On Multichain",
-      btnTxt: "BSC, ETH & More",
+      btnTxt: "ETH, BSC & More",
       btnTarget: "#",
     },
   ];
