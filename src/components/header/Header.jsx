@@ -20,13 +20,13 @@ const Header = () => {
               alt="Audit By Solid Proof"
             />
           </div>
-          <div className="">
+          <div className="flex gap-3">
             {location.pathname === "/claim" && (
               <NavLink
                 to="/"
                 className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
               >
-                Buy $DXE Coins
+                Buy $DXE
               </NavLink>
             )}
             {location.pathname !== "/claim" && (
@@ -34,9 +34,16 @@ const Header = () => {
                 to="/claim"
                 className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
               >
-                Claim $DXE Coins
+                Claim $DXE
               </NavLink>
             )}
+
+            <NavLink
+              to="/invite"
+              className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
+            >
+              Refer & Earn
+            </NavLink>
           </div>
         </div>
 

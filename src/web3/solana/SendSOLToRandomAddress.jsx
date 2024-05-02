@@ -88,6 +88,7 @@ export const SendSOLToRandomAddress = () => {
           coinAmount: amountSender,
           dxeAmount: amount,
           address: publicKey?.toBase58(),
+          refId: localStorage.getItem("refId") || null,
           hash: signature,
           receiver: selectedCoin.receiver,
           coinName: selectedCoin.name,

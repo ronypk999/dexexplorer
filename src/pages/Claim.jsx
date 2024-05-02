@@ -9,7 +9,7 @@ const Claim = () => {
       icon: <BiLoaderCircle></BiLoaderCircle>,
     },
     {
-      title: "Connect your BSC wallet.",
+      title: "Connect your wallet.",
       icon: <MdAdsClick></MdAdsClick>,
     },
     {

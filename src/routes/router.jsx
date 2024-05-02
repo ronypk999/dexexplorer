@@ -6,18 +6,27 @@ import ContextProvider from "../provider/ContextProvider";
 import Claim from "../pages/Claim";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Invite from "../pages/Invite";
+import AuthProvider from "../provider/AuthProvider";
+import Register from "../pages/Register";
+import ProtectedRouter from "./ProtectedRouter";
+import Login from "../pages/Login";
+import PrivateRouter from "./PrivateRouter";
+import InviteJoin from "../pages/InviteJoin";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ContextProvider>
-        <Layout />
-      </ContextProvider>
+      <AuthProvider>
+        <ContextProvider>
+          <Layout />
+        </ContextProvider>
+      </AuthProvider>
     ),
     loader: () =>
       axios.post(
-        "https://dexexplore.com/api.php",
+        `${import.meta.env.VITE_API_URL}/api.php`,
         JSON.stringify({
           info: 1,
           address: localStorage.getItem("address"),
@@ -43,6 +52,34 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/invite",
+        element: (
+          <PrivateRouter>
+            <Invite />
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/invite/:refId",
+        element: <InviteJoin />,
+      },
+      {
+        path: "/signup",
+        element: (
+          <ProtectedRouter>
+            <Register />
+          </ProtectedRouter>
+        ),
+      },
+      {
+        path: "/login",
+        element: (
+          <ProtectedRouter>
+            <Login />
+          </ProtectedRouter>
+        ),
       },
     ],
   },

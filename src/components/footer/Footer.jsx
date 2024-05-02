@@ -163,7 +163,10 @@ const Footer = () => {
             <FaMessage></FaMessage>
             <span>Contact</span>
           </Link>
-          <Link to="/" className="link link-hover flex items-center gap-1">
+          <Link
+            to={location.pathname === "/buy" ? "/" : "/buy"}
+            className="link link-hover flex items-center gap-1"
+          >
             <FaBolt></FaBolt>
             <span>Presale</span>
           </Link>

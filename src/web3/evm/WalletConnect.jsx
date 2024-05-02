@@ -17,8 +17,15 @@ import PropTypes from "prop-types";
 import { InfoContext } from "../../provider/ContextProvider";
 
 export const WalletConnect = () => {
-  const { updateData, amountSender, amount, selectedCoin, amountValidate } =
-    useContext(InfoContext);
+  const {
+    updateData,
+    amountSender,
+    amount,
+    selectedCoin,
+    setSelectedCoin,
+    coins,
+    amountValidate,
+  } = useContext(InfoContext);
 
   const [buyBtnTxt, setBuyBtnTxt] = useState(`Buy with ${selectedCoin.name}`);
 
@@ -42,14 +49,36 @@ export const WalletConnect = () => {
   }, [address]);
 
   const chainId = useChainId();
-  const { switchChain } = useSwitchChain();
+  const { chains, switchChain } = useSwitchChain();
 
   useEffect(() => {
-    if (selectedCoin.chainId && selectedCoin.chainId !== chainId) {
-      switchChain({ chainId: selectedCoin.chainId });
-      setBuyBtnTxt(`Buy with ${selectedCoin.name}`);
+    if (
+      isConnected &&
+      selectedCoin.chainId &&
+      selectedCoin.chainId !== chainId
+    ) {
+      console.log("Trigger 1", selectedCoin.chainId, chainId);
+      setTimeout(() => {
+        switchChain({ chainId: selectedCoin.chainId });
+        setBuyBtnTxt(`Buy with ${selectedCoin.name}`);
+      }, 1000);
     }
-  }, [selectedCoin]);
+  }, [selectedCoin, isConnected, chainId]);
+
+  // useEffect(() => {
+  //   if (
+  //     isConnected &&
+  //     selectedCoin.chainId &&
+  //     selectedCoin.chainId !== chainId
+  //   ) {
+  //     console.log("Trigger 2", selectedCoin.chainId, chainId);
+  //     setTimeout(() => {
+  //       const coin = coins.find((coin) => coin.chainId === chainId);
+  //       setSelectedCoin(coin);
+  //       setBuyBtnTxt(`Buy with ${coin.name}`);
+  //     }, 1000);
+  //   }
+  // }, [chainId, isConnected, selectedCoin]);
 
   const buyWithBnb = () => {
     const check = amountValidate(balance.data.formatted);
@@ -81,6 +110,7 @@ export const WalletConnect = () => {
         coinAmount: amountSender,
         dxeAmount: amount,
         address: address,
+        refId: localStorage.getItem("refId") || null,
         hash: SendTransactionData,
         receiver: selectedCoin.receiver,
         coinName: selectedCoin.name,
@@ -130,7 +160,7 @@ export const WalletConnect = () => {
           </>
         )}
         <div className="mx-auto w-fit pt-6">
-          <w3m-button />
+          <w3m-button size="md" />
         </div>
       </div>
     </>

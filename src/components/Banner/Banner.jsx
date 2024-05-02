@@ -83,7 +83,7 @@ const Banner = () => {
             <div className="w-fit text-left mx-auto mb-5">
               <h1 className="mb-5 md:text-3xl font-bold text-2xl flex items-center">
                 Presale is live
-                <img src={liveGif} className="w-12" />
+                <img src={liveGif} className="w-12 rounded-full" />
               </h1>
               <div className="">
                 <h4 className="text-center pb-1">

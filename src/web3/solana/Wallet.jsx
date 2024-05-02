@@ -8,9 +8,14 @@ import {
 } from "@solana/wallet-adapter-react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
-  PhantomWalletAdapter,
-  SolflareWalletAdapter,
   CoinbaseWalletAdapter,
+  WalletConnectWalletAdapter,
+  HuobiWalletAdapter,
+  TrustWalletAdapter,
+  FractalWalletAdapter,
+  SaifuWalletAdapter,
+  SolflareWalletAdapter,
+  PhantomWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import {
   WalletModalProvider,
@@ -45,9 +50,27 @@ export const Wallet = () => {
        * instantiate its legacy wallet adapter here. Common legacy adapters can be found
        * in the npm package `@solana/wallet-adapter-wallets`.
        */
-      new PhantomWalletAdapter(),
       new SolflareWalletAdapter(),
       new CoinbaseWalletAdapter(),
+      new TrustWalletAdapter(),
+      new PhantomWalletAdapter(),
+      new WalletConnectWalletAdapter({
+        network,
+        options: {
+          relayUrl: "wss://relay.walletconnect.com",
+          // example WC app project ID
+          projectId: "09412ca882921e14c0d6e881f47855f7",
+          metadata: {
+            name: "DexExplore",
+            description: `Worlds First Crypto Explorer, Explore Multichain is few clicks`,
+            url: "https://dexexplore.com", // origin must match your domain & subdomain
+            icons: ["https://dexexplore.com/dexicon.png"],
+          },
+        },
+      }),
+      new HuobiWalletAdapter(),
+      new FractalWalletAdapter(),
+      new SaifuWalletAdapter(),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [network]

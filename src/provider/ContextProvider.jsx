@@ -17,7 +17,7 @@ const ContextProvider = ({ children }) => {
   const updateData = (address) => {
     axios
       .post(
-        "https://dexexplore.com/api.php",
+        `${import.meta.env.VITE_API_URL}/api.php`,
         JSON.stringify({
           info: 1,
           address: address || localStorage.getItem("address"),
