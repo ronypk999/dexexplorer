@@ -7,10 +7,11 @@ import {
   linkWithCredential,
   OAuthProvider,
   sendEmailVerification,
+  updateEmail,
 } from "firebase/auth";
 import auth from "../config/firebase";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -21,9 +22,11 @@ const AuthProvider = ({ children }) => {
 
   const [user, SetUser] = useState(null);
   const [verifyEmail, setVerifyEmail] = useState(false);
+  const [changeEmail, setChangeEmail] = useState(false);
   const [load, setLoad] = useState(true);
   const [loginType, setLoginType] = useState(null);
   const [token, setToken] = useState(null);
+  const changeEmailRef = useRef();
 
   const emailSignUp = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -54,6 +57,21 @@ const AuthProvider = ({ children }) => {
         } else {
           console.error(error);
         }
+      });
+  };
+
+  const sendEmailVerify = () => {
+    updateEmail(user, changeEmailRef.current.value)
+      .then(() => {
+        try {
+          sendEmailVerification(user);
+          setVerifyEmail(true);
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -100,9 +118,13 @@ const AuthProvider = ({ children }) => {
     setVerifyEmail,
     verifyEmail,
     load,
+    sendEmailVerify,
+    changeEmailRef,
     token,
     setToken,
     logout,
+    setChangeEmail,
+    changeEmail,
     user,
   };
 

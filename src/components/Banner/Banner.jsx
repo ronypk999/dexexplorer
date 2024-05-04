@@ -10,62 +10,64 @@ import liveGif from "../../assets/live.gif";
 const Banner = () => {
   const info = useContext(InfoContext);
   const { collectedDXE, presaleEndTime, myPurchase, usdPrice } = info;
-
-  const renderer = ({ days, hours, minutes, seconds, completed }) => {
-    if (completed) {
-      // Render a completed state
-      return (
-        <>
-          <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
-            <div className="flex flex-col">
-              <span className="text-pink-500">00</span> <span>Days</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">00</span> <span>Hours</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">00</span> <span>Minutes</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">00</span> <span>Seconds</span>
-            </div>
-          </h1>
-        </>
-      );
-    } else {
-      // Render a countdown
-      return (
-        <>
-          <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
-            <div className="flex flex-col">
-              <span className="text-pink-500">
-                {String(days).padStart(2, "0")}
-              </span>{" "}
-              <span>Days</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">
-                {String(hours).padStart(2, "0")}
-              </span>
-              <span>Hours</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">
-                {String(minutes).padStart(2, "0")}
-              </span>
-              <span>Minutes</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-pink-500">
-                {String(seconds).padStart(2, "0")}
-              </span>
-              <span>Seconds</span>
-            </div>
-          </h1>
-        </>
-      );
-    }
+  const format = (am) => {
+    return Number(am).toFixed(2);
   };
+  // const renderer = ({ days, hours, minutes, seconds, completed }) => {
+  //   if (completed) {
+  //     // Render a completed state
+  //     return (
+  //       <>
+  //         <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">00</span> <span>Days</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">00</span> <span>Hours</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">00</span> <span>Minutes</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">00</span> <span>Seconds</span>
+  //           </div>
+  //         </h1>
+  //       </>
+  //     );
+  //   } else {
+  //     // Render a countdown
+  //     return (
+  //       <>
+  //         <h1 className="mb-5 md:gap-6 lg:gap-12 flex flex-row justify-around text-xl md:text-3xl">
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">
+  //               {String(days).padStart(2, "0")}
+  //             </span>{" "}
+  //             <span>Days</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">
+  //               {String(hours).padStart(2, "0")}
+  //             </span>
+  //             <span>Hours</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">
+  //               {String(minutes).padStart(2, "0")}
+  //             </span>
+  //             <span>Minutes</span>
+  //           </div>
+  //           <div className="flex flex-col">
+  //             <span className="text-pink-500">
+  //               {String(seconds).padStart(2, "0")}
+  //             </span>
+  //             <span>Seconds</span>
+  //           </div>
+  //         </h1>
+  //       </>
+  //     );
+  //   }
+  // };
 
   return (
     <>
@@ -100,7 +102,7 @@ const Banner = () => {
             </div>
             <div className="md:px-12">
               <div>
-                {collectedDXE.toFixed(2)} / {600000000 / 5} $DXE
+                {format(collectedDXE)} / {600000000 / 5} $DXE
               </div>
               <progress
                 className="progress bg-neutral-500 progress-success"
@@ -110,8 +112,8 @@ const Banner = () => {
             </div>
             <p className="mb-5 flex flex-col gap-3">
               <span>
-                YOUR PURCHASED $DXE = {myPurchase || 0} / $
-                {(myPurchase * usdPrice).toFixed(2)}
+                YOUR PURCHASED $DXE = {format(myPurchase) || 0} / $
+                {format(myPurchase * usdPrice)}
               </span>
             </p>
             <p className="mb-5 flex flex-col gap-3">

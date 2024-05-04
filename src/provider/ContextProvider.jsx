@@ -14,13 +14,14 @@ export const InfoContext = createContext({});
 const ContextProvider = ({ children }) => {
   const [data, setData] = useState(useLoaderData());
 
-  const updateData = (address) => {
+  const updateData = (addressEvm = null, AddressSolana = null) => {
     axios
       .post(
         `${import.meta.env.VITE_API_URL}/api.php`,
         JSON.stringify({
           info: 1,
-          address: address || localStorage.getItem("address"),
+          addressEvm: addressEvm || localStorage.getItem("addressEvm"),
+          AddressSolana: AddressSolana || localStorage.getItem("addressSolana"),
         })
       )
       .then((d) => setData(d))
@@ -73,7 +74,7 @@ const ContextProvider = ({ children }) => {
     }
 
     if (amountSender < 0.001) {
-      return "Minimum buy 0.001 BNB";
+      return `Minimum buy 0.001 ${selectedCoin.name}`;
     }
 
     if (amountSender > balance) {

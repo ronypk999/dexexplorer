@@ -3,7 +3,7 @@ const ClaimStep = ({ index, data }) => {
   const { icon, title } = data;
 
   return (
-    <div className="relative w-full mx-auto space-y-8 bg-white p-8 shadow-[0px_0px_30px_2px_rgba(100,100,111,0.1)] dark:bg-[#18181B] md:w-[300px]">
+    <div className="relative w-full mx-auto space-y-8 p-8 shadow-[0px_0px_30px_2px_rgba(100,100,111,0.1)] bg-[#18181B] md:w-[300px]">
       {/* top part  */}
       <div>
         <div className="text-7xl text-white"> {icon}</div>

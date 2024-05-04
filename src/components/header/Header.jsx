@@ -21,7 +21,7 @@ const Header = () => {
             />
           </div>
           <div className="flex gap-3">
-            {location.pathname === "/claim" && (
+            {location.pathname !== "/" && location.pathname !== "/buy" && (
               <NavLink
                 to="/"
                 className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
@@ -29,7 +29,16 @@ const Header = () => {
                 Buy $DXE
               </NavLink>
             )}
-            {location.pathname !== "/claim" && (
+            {location.pathname === "/" && (
+              <NavLink
+                to="/claim"
+                className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"
+              >
+                Claim $DXE
+              </NavLink>
+            )}
+
+            {location.pathname === "/buy" && (
               <NavLink
                 to="/claim"
                 className="btn hover:bg-white hover:text-black bg-black border-2 border-white text-white rounded-box"

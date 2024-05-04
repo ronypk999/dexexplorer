@@ -43,7 +43,7 @@ export const WalletConnect = () => {
 
   useEffect(() => {
     if (address) {
-      localStorage.setItem("address", address);
+      localStorage.setItem("addressEvm", address);
       updateData(address);
     }
   }, [address]);

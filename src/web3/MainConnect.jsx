@@ -48,7 +48,7 @@ const MainConnect = () => {
 
       <div>
         <div className="flex justify-around flex-wrap  gap-3 py-6 cursor-pointer">
-          {coins.map(({ name, icon }, idx) => {
+          {coins?.map(({ name, icon }, idx) => {
             return (
               <div
                 className={`flex items-center gap-1 border-2 px-3 py-2 rounded-box ${
@@ -93,7 +93,7 @@ const MainConnect = () => {
         </div>
 
         <>
-          <div className="pt-6">{selectedCoin.wallet}</div>
+          <div className="pt-6">{selectedCoin?.wallet}</div>
         </>
 
         <a

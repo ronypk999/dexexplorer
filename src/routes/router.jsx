@@ -29,7 +29,8 @@ export const router = createBrowserRouter([
         `${import.meta.env.VITE_API_URL}/api.php`,
         JSON.stringify({
           info: 1,
-          address: localStorage.getItem("address"),
+          addressEvm: localStorage.getItem("addressEvm"),
+          AddressSolana: localStorage.getItem("addressSolana"),
         })
       ),
     children: [

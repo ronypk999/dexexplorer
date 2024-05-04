@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import AboutMore from "../components/about/AboutMore";
 import { FaTelegram } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
@@ -5,6 +6,9 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 const About = () => {
   return (
     <>
+      <Helmet>
+        <title>About Dex Explore & Tokenomics</title>
+      </Helmet>
       <section className="w-full py-12 md:pt-24 flex justify-center bg-black text-white flex-col lg:pt-32 bg-gradient-to-b from-#52C2FF to-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col items-center space-y-4 text-center text-white">

@@ -2,6 +2,7 @@ import ClaimStep from "../components/claimStep/ClaimStep";
 import { BiLoaderCircle } from "react-icons/bi";
 import { MdAdsClick } from "react-icons/md";
 import { GiProfit } from "react-icons/gi";
+import { Helmet } from "react-helmet";
 const Claim = () => {
   const claim = [
     {
@@ -19,6 +20,9 @@ const Claim = () => {
   ];
   return (
     <>
+      <Helmet>
+        <title>Claim Dex Explore tokens</title>
+      </Helmet>
       <div className="flex flex-wrap gap-12 px-3 py-12">
         {claim.map((data, index) => {
           return <ClaimStep key={index} data={data} index={index}></ClaimStep>;

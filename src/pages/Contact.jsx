@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { MdEmail } from "react-icons/md";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,9 @@ const Contact = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Contact Dex Explore Team</title>
+      </Helmet>
       <ToastContainer></ToastContainer>
       <div className="w-full bg-gray-800 pb-12">
         <div className="bg-gradient-to-b from-blue-800 to-blue-600 h-96"></div>

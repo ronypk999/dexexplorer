@@ -10,14 +10,19 @@ import {
   XIcon,
 } from "react-share";
 import axios from "axios";
+import Verify from "../components/modal/Verify";
 
 const Invite = () => {
   const [reward, setReward] = useState(null);
   const [copy, setCopy] = useState(false);
-  const { user, verifyEmail, setVerifyEmail, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const refUrl = `https://dexexplore.com/invite/${user?.uid}`;
-  const shareText =
-    "#DXE PRESALE IS LIVE. Participate #dexexplore presale by clicking below";
+  const shareText = `Dex Explore Presale Is Live Buy $DXE Tokens By Clicking Below! #DexExplore
+
+Follow @Dexexplore
+
+Dex explore is a crypto search engine build on $SOL $BNB $ETH And More! Listing on top exchanges soon Buy Now.
+`;
   const handleCopy = () => {
     if (navigator.clipboard.writeText(refUrl)) {
       setCopy(true);
@@ -44,6 +49,10 @@ const Invite = () => {
     }
   }, [user]);
 
+  const format = (am) => {
+    return Number(am).toFixed(2);
+  };
+
   return (
     <>
       <Helmet>
@@ -52,7 +61,12 @@ const Invite = () => {
       <div className="px-3 py-12 bg-black">
         <div className="card text-neutral-content">
           <div className="card-body items-center text-center">
-            <h2 className="card-title">Invite your friends & earn $DXE</h2>
+            <h1 className="text-3xl font-bold pb-3 md:text-4xl">
+              Earn upto $50,000+ in $DXE
+            </h1>
+            <h2 className="card-title">
+              Invite your friends & earn 5% $DXE on purchase
+            </h2>
             <input
               type="text"
               placeholder="Refer URL"
@@ -96,7 +110,9 @@ const Invite = () => {
                 <h2>Total Invited</h2>
               </div>
               <div className="flex flex-col gap-3">
-                <div className="">{reward && reward.dxeBalance} $DXE</div>
+                <div className="">
+                  {reward && format(reward.dxeBalance)} $DXE
+                </div>
                 <h2>Total Rewards</h2>
               </div>
             </div>
@@ -104,6 +120,7 @@ const Invite = () => {
         </div>
         {reward?.ref?.length > 0 && (
           <div className="overflow-x-auto">
+            {console.log(reward.ref[0].coinAmount)}
             <table className="table text-white">
               <thead className="text-white">
                 <tr>
@@ -116,25 +133,21 @@ const Invite = () => {
                 </tr>
               </thead>
               <tbody>
-                {reward.ref.map(
-                  (
-                    { id, address, dxeAmount, coinAmount, date, coinName },
-                    idx
-                  ) => {
-                    return (
-                      <tr key={id}>
-                        <th>{idx}</th>
-                        <td>{address}</td>
-                        <td>
-                          {coinName} {coinAmount}
-                        </td>
-                        <td>$DXE {dxeAmount}</td>
-                        <td>$DXE {(dxeAmount / 100) * 5}</td>
-                        <td>{date}</td>
-                      </tr>
-                    );
-                  }
-                )}
+                {reward.ref.map((data, idx) => {
+                  console.log(data);
+                  return (
+                    <tr key={idx}>
+                      <th>{idx + 1}</th>
+                      <td>{data[1]}</td>
+                      <td>
+                        {data[3]} {data[6]}
+                      </td>
+                      <td>{format(data[4])} $DXE</td>
+                      <td>{format((data[4] / 100) * 5)} $DXE</td>
+                      <td>{data[8]}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
               <tfoot className="text-white">
                 <tr>
@@ -158,7 +171,10 @@ const Invite = () => {
         <div className="modal-box bg-neutral max-w-xs">
           <h3 className="font-bold text-lg text-white">Share via</h3>
           <div className="py-4 flex flex-wrap justify-around">
-            <FacebookShareButton url={user && refUrl} hashtag={shareText}>
+            <FacebookShareButton
+              url={user && refUrl}
+              hashtag="Dex Explore Presale Is Live Buy $DXE Tokens By Clicking Below! #DexExplore"
+            >
               <FacebookIcon size={48} round />
             </FacebookShareButton>
             <TwitterShareButton
@@ -181,60 +197,7 @@ const Invite = () => {
           <button>close</button>
         </form>
       </dialog>
-      <div>
-        <div
-          className={`fixed z-[100] flex items-center justify-center ${
-            verifyEmail ? "opacity-1 visible" : "invisible opacity-0"
-          } inset-0 bg-black/20 backdrop-blur-sm duration-100`}
-        >
-          <div
-            className={`absolute max-w-md rounded-lg bg-white p-3 pb-5 text-center drop-shadow-2xl dark:bg-gray-800 dark:text-white ${
-              verifyEmail
-                ? "scale-1 opacity-1 duration-300"
-                : "scale-0 opacity-0 duration-150"
-            } `}
-          >
-            <svg
-              onClick={() => setVerifyEmail(false)}
-              className="mx-auto mr-0 w-8 cursor-pointer fill-black dark:fill-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g strokeWidth="0"></g>
-              <g strokeLinecap="round" strokeLinejoin="round"></g>
-              <g>
-                <path d="M6.99486 7.00636C6.60433 7.39689 6.60433 8.03005 6.99486 8.42058L10.58 12.0057L6.99486 15.5909C6.60433 15.9814 6.60433 16.6146 6.99486 17.0051C7.38538 17.3956 8.01855 17.3956 8.40907 17.0051L11.9942 13.4199L15.5794 17.0051C15.9699 17.3956 16.6031 17.3956 16.9936 17.0051C17.3841 16.6146 17.3841 15.9814 16.9936 15.5909L13.4084 12.0057L16.9936 8.42059C17.3841 8.03007 17.3841 7.3969 16.9936 7.00638C16.603 6.61585 15.9699 6.61585 15.5794 7.00638L11.9942 10.5915L8.40907 7.00636C8.01855 6.61584 7.38538 6.61584 6.99486 7.00636Z"></path>
-              </g>
-            </svg>
-            <h1 className="mb-2 text-2xl font-semibold">
-              Dex Explore Email Verification!
-            </h1>
-            <p className="px-1 mb-3 text-sm opacity-80">
-              Please check your email inbox for email verification link. Click
-              the verification link and verify your email account to continue
-              using dexexplore.com
-            </p>
-            <div className="flex gap-3 justify-center">
-              <button
-                onClick={() => setVerifyEmail(false)}
-                className="rounded-md bg-indigo-600 hover:bg-indigo-700 px-6 py-1.5 text-white"
-              >
-                Ok
-              </button>
-              <button
-                onClick={() => {
-                  setVerifyEmail(false);
-                  logout();
-                }}
-                className="rounded-md bg-red-600 hover:bg-red-700 px-6 py-1.5 text-white"
-              >
-                Logout
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Verify></Verify>
     </>
   );
 };

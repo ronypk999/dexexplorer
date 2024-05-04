@@ -34,7 +34,7 @@ export const SendSOLToRandomAddress = () => {
 
   useEffect(() => {
     if (publicKey) {
-      localStorage.setItem("address", publicKey?.toBase58());
+      localStorage.setItem("addressSolana", publicKey?.toBase58());
       updateData(publicKey?.toBase58());
     }
   }, [publicKey]);
@@ -42,21 +42,22 @@ export const SendSOLToRandomAddress = () => {
   const onClick = useCallback(
     async (e, amountSender, amount, selectedCoin) => {
       try {
-        e.target.innerText = "Prcocessing...";
+        e.target.innerText = "Processing...";
         if (!publicKey) throw new WalletNotConnectedError();
 
-        // 890880 lamports as of 2022-09-01
-        const lamports = await connection.getMinimumBalanceForRentExemption(0);
-
         const sol = amountSender * LAMPORTS_PER_SOL;
-        if (sol < lamports) {
-          toast.error("Please enter more sol to cover fees", { theme: "dark" });
+        const feesAndSol = sol + 1500000;
+
+        if (sol < 5000000) {
+          toast.error("Minimum amount to proceed 0.005 SOL", { theme: "dark" });
           return;
         }
 
         const balance = await connection.getBalance(publicKey);
-        if (balance < sol) {
-          toast.error("You do not have enough balance", { theme: "dark" });
+        if (balance < feesAndSol) {
+          toast.error("Make sure you have 0.0015 SOL extra to cover gas fees", {
+            theme: "dark",
+          });
           return;
         }
         const transaction = new Transaction().add(
@@ -77,7 +78,7 @@ export const SendSOLToRandomAddress = () => {
         });
         setHash(signature);
 
-        const confirm = await connection.confirmTransaction({
+        await connection.confirmTransaction({
           blockhash,
           lastValidBlockHeight,
           signature,
@@ -93,8 +94,6 @@ export const SendSOLToRandomAddress = () => {
           receiver: selectedCoin.receiver,
           coinName: selectedCoin.name,
         });
-
-        console.log(apiObj);
 
         //send data to database
         axios

@@ -174,10 +174,10 @@ const Footer = () => {
         <nav className="font-bold">Follow Us!</nav>
         <nav>
           <div className="grid grid-flow-col gap-4">
-            <a>
+            <a href="https://twitter.com/Dexexplore" target="_blank">
               <FaSquareXTwitter className="text-4xl"></FaSquareXTwitter>
             </a>
-            <a>
+            <a href="https://t.me/dexexplore" target="_blank">
               <FaTelegram className="text-4xl"></FaTelegram>
             </a>
           </div>

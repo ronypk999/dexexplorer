@@ -50,6 +50,7 @@ export const Wallet = () => {
        * instantiate its legacy wallet adapter here. Common legacy adapters can be found
        * in the npm package `@solana/wallet-adapter-wallets`.
        */
+
       new SolflareWalletAdapter(),
       new CoinbaseWalletAdapter(),
       new TrustWalletAdapter(),
